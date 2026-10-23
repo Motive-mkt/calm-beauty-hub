@@ -1,6 +1,7 @@
 import StampCard from "@/components/StampCard";
 import ServicesMenu from "@/components/ServicesMenu";
 import Reviews from "@/components/Reviews";
+import Mark from "@/components/Mark";
 import { services } from "@/lib/services";
 import { mapEmbed, mapLink, site, telLink, whatsappLink } from "@/lib/site";
 
@@ -48,12 +49,7 @@ export default function Home() {
       <header className="nav">
         <div className="wrap nav__in">
           <a href="#top" className="brand" aria-label={`${site.name}, home`}>
-            <svg viewBox="-20 -20 40 40" aria-hidden="true" className="brand__mark">
-              {[0, 72, 144, 216, 288].map((r) => (
-                <ellipse key={r} cx="0" cy="-8" rx="4.6" ry="8.4" transform={`rotate(${r})`} />
-              ))}
-              <circle r="3" className="brand__core" />
-            </svg>
+            <Mark />
             <span>{site.name}</span>
           </a>
           <nav className="nav__links" aria-label="Main">
@@ -62,7 +58,7 @@ export default function Home() {
             <a href="#reviews">Reviews</a>
             <a href="#visit">Visit</a>
           </nav>
-          <a className="btn btn--rose btn--sm" href={whatsappLink()} target="_blank" rel="noopener noreferrer">
+          <a className="btn btn--ink btn--sm" href={whatsappLink()} target="_blank" rel="noopener noreferrer">
             Book now
           </a>
         </div>
@@ -73,38 +69,58 @@ export default function Home() {
           <div className="wrap hero__in">
             <div className="hero__copy">
               <p className="eyebrow">
-                {site.name} · {site.area}
+                {site.area} · Women and men
               </p>
               <h1 className="hero__title">
-                Five calm visits.
+                Five visits.
                 <br />
-                <em>One treat on us.</em>
+                <span className="hero__pink">One free treat.</span>
               </h1>
               <p className="hero__lede">
-                Complete 5 paid visits and your 5th comes with a free bonus service: nail art for women, a
-                facial scrub for men. Hair, nails, skin and grooming, all in {site.area}.
+                Hair, nails, skin and grooming in {site.area}. Complete 5 paid visits and your 5th comes with a
+                free bonus service: nail art for women, a facial scrub for men.
               </p>
               <div className="hero__cta">
                 <a className="btn btn--rose btn--lg" href={whatsappLink()} target="_blank" rel="noopener noreferrer">
                   <WhatsAppIcon /> Book on WhatsApp
                 </a>
-                <a className="btn btn--ghost btn--lg" href={telLink}>
+                <a className="btn btn--line btn--lg" href={telLink}>
                   <PhoneIcon /> Call {site.phoneDisplay}
                 </a>
               </div>
             </div>
-            <div className="hero__card">
+            <div className="hero__visual">
+              <div className="hero__block" aria-hidden="true" />
               <StampCard />
             </div>
           </div>
         </section>
 
+        <section className="facts" aria-label="Why Calm Beauty Hub">
+          <ul className="wrap facts__in">
+            <li>
+              <strong>For women and men</strong>
+              <span>One salon, two full menus</span>
+            </li>
+            <li>
+              <strong>Prices up front</strong>
+              <span>See every price before you book</span>
+            </li>
+            <li>
+              <strong>Book in one message</strong>
+              <span>WhatsApp or call, no forms</span>
+            </li>
+          </ul>
+        </section>
+
         <section className="section" id="rewards" aria-labelledby="rewards-h">
           <div className="wrap">
-            <p className="eyebrow">The loyalty reward</p>
-            <h2 className="h2" id="rewards-h">
-              How your free treat works
-            </h2>
+            <div className="section__head">
+              <p className="eyebrow">The loyalty reward</p>
+              <h2 className="h2" id="rewards-h">
+                How your free treat works
+              </h2>
+            </div>
             <ol className="steps">
               <li className="step">
                 <span className="step__n" aria-hidden="true">1</span>
@@ -128,26 +144,28 @@ export default function Home() {
 
             <div className="rewards">
               <article className="reward">
-                <p className="reward__for">For women</p>
+                <p className="reward__for">Women</p>
                 <h3 className="reward__name">Free nail art</h3>
                 <p>A hand-painted design added to your visit.</p>
               </article>
               <article className="reward">
-                <p className="reward__for">For men</p>
+                <p className="reward__for">Men</p>
                 <h3 className="reward__name">Free facial scrub</h3>
                 <p>A deep-cleansing scrub to finish your grooming.</p>
               </article>
             </div>
-            <p className="fine">Ask us at any visit how many stamps you have.</p>
+            <p className="fine">Rewards apply to paid visits. Ask us at any visit how many stamps you have.</p>
           </div>
         </section>
 
         <section className="section section--tint" id="services" aria-labelledby="services-h">
           <div className="wrap">
-            <p className="eyebrow">Services and prices</p>
-            <h2 className="h2" id="services-h">
-              Choose your treatment
-            </h2>
+            <div className="section__head">
+              <p className="eyebrow">Services and prices</p>
+              <h2 className="h2" id="services-h">
+                Choose your treatment
+              </h2>
+            </div>
             <ServicesMenu menu={services} />
             <p className="fine">Prices are in Kenya shillings. “From” prices depend on length and style.</p>
           </div>
@@ -155,18 +173,20 @@ export default function Home() {
 
         <section className="section" id="reviews" aria-labelledby="reviews-h">
           <div className="wrap">
-            <p className="eyebrow">What clients say</p>
-            <h2 className="h2" id="reviews-h">
-              Verified Google reviews
-            </h2>
+            <div className="section__head">
+              <p className="eyebrow">What clients say</p>
+              <h2 className="h2" id="reviews-h">
+                Verified Google reviews
+              </h2>
+            </div>
             <Reviews />
           </div>
         </section>
 
-        <section className="section section--tint" id="visit" aria-labelledby="visit-h">
+        <section className="section section--dark" id="visit" aria-labelledby="visit-h">
           <div className="wrap visit">
             <div className="visit__info">
-              <p className="eyebrow">Find us</p>
+              <p className="eyebrow eyebrow--onink">Find us</p>
               <h2 className="h2" id="visit-h">
                 Visit us in {site.area}
               </h2>
@@ -191,10 +211,10 @@ export default function Home() {
                 <a className="btn btn--rose" href={whatsappLink()} target="_blank" rel="noopener noreferrer">
                   <WhatsAppIcon /> WhatsApp us
                 </a>
-                <a className="btn btn--ghost" href={telLink}>
+                <a className="btn btn--onink" href={telLink}>
                   <PhoneIcon /> {site.phoneDisplay}
                 </a>
-                <a className="btn btn--soft" href={mapLink} target="_blank" rel="noopener noreferrer">
+                <a className="btn btn--onink" href={mapLink} target="_blank" rel="noopener noreferrer">
                   Get directions
                 </a>
               </div>
@@ -215,6 +235,9 @@ export default function Home() {
 
       <footer className="footer">
         <div className="wrap footer__in">
+          <p className="footer__brand">
+            <Mark className="brand__mark brand__mark--sm" /> {site.name}
+          </p>
           <p>
             © {new Date().getFullYear()} {site.name}, {site.area}
           </p>
@@ -226,15 +249,14 @@ export default function Home() {
         </div>
       </footer>
 
-      <a
-        className="fab"
-        href={whatsappLink()}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Book on WhatsApp"
-      >
-        <WhatsAppIcon />
-      </a>
+      <div className="dock" role="group" aria-label="Book now">
+        <a className="btn btn--rose" href={whatsappLink()} target="_blank" rel="noopener noreferrer">
+          <WhatsAppIcon /> Book on WhatsApp
+        </a>
+        <a className="btn btn--ink" href={telLink} aria-label={`Call ${site.phoneDisplay}`}>
+          <PhoneIcon /> Call
+        </a>
+      </div>
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
     </>
