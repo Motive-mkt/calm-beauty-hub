@@ -106,6 +106,8 @@ button {
 
 /* ---------- Buttons ---------- */
 .btn {
+  position: relative;
+  overflow: hidden;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -249,6 +251,8 @@ button {
   padding: 48px 0 72px;
 }
 .hero__in {
+  position: relative;
+  z-index: 1;
   display: grid;
   gap: 56px;
   align-items: center;
@@ -327,6 +331,7 @@ button {
   color: var(--white);
   border-radius: var(--r-lg);
   box-shadow: 0 30px 60px -30px rgba(25, 23, 28, 0.55);
+  overflow: hidden;
 }
 .card__head {
   display: flex;
@@ -474,7 +479,7 @@ button {
 }
 
 .stamps--animate .stamp.is-done .stamp__disc {
-  animation: stamp 0.55s var(--ease) both;
+  animation: stamp 0.55s var(--ease) backwards;
   animation-delay: calc(var(--i) * 140ms + 300ms);
 }
 @keyframes stamp {
@@ -1387,10 +1392,10 @@ body:has(.adm-login) {
       transform: none;
     }
   }
-  .hero__visual {
+  .hero[data-anim="on"] .hero__visual {
     animation: rise 0.9s var(--ease) 0.35s both;
   }
-  .hero__block {
+  .hero[data-anim="on"] .hero__block {
     animation: drift 9s ease-in-out infinite alternate;
   }
   @keyframes drift {
@@ -1411,7 +1416,7 @@ body:has(.adm-login) {
   }
   /* A glow card handles its own hover transform, so the reveal wrapper carries the entrance */
   .js .step.reveal.is-in .step__n {
-    animation: pop 0.6s var(--ease) calc(var(--rv-delay, 0s) + 0.15s) both;
+    animation: pop 0.6s var(--ease) calc(var(--rv-delay, 0s) + 0.15s) backwards;
   }
   @keyframes pop {
     from {
@@ -1458,6 +1463,297 @@ body:has(.adm-login) {
         transform: scaleX(1);
       }
     }
+  }
+}
+
+/* ---------- Hover and click motion ---------- */
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0);
+  animation: ripple 0.65s var(--ease);
+}
+@keyframes ripple {
+  from {
+    opacity: 0.28;
+    transform: scale(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1);
+  }
+}
+.burst {
+  position: fixed;
+  z-index: 100;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* Hero ambient motion (rendered only while heroAnimated is true) */
+.hfx {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.hfx__orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px);
+}
+.hfx__orb--a {
+  top: -140px;
+  left: -120px;
+  width: 460px;
+  height: 460px;
+  background: radial-gradient(circle, rgba(255, 143, 184, 0.38), transparent 68%);
+}
+.hfx__orb--b {
+  right: -100px;
+  bottom: -160px;
+  width: 520px;
+  height: 520px;
+  background: radial-gradient(circle, rgba(248, 211, 225, 0.9), transparent 68%);
+}
+.hfx__spark {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  fill: var(--pink);
+}
+.hfx__spark--1 { top: 16%; left: 47%; }
+.hfx__spark--2 { top: 70%; left: 6%; width: 12px; height: 12px; }
+.hfx__spark--3 { top: 12%; right: 7%; width: 22px; height: 22px; fill: var(--rose); }
+.hfx__spark--4 { bottom: 12%; right: 38%; width: 14px; height: 14px; }
+.hfx__chip {
+  display: none;
+}
+@media (min-width: 960px) {
+  .hfx__chip {
+    position: absolute;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 15px;
+    background: var(--white);
+    border: 1.5px solid var(--ink);
+    border-radius: 999px;
+    box-shadow: 4px 4px 0 var(--blush);
+    font-size: 0.88rem;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .hfx__chip i {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--rose);
+  }
+  .hfx__chip--a {
+    top: -30px;
+    left: -26px;
+  }
+  .hfx__chip--b {
+    right: -20px;
+    bottom: -34px;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hfx__orb--a {
+    animation: orb-a 14s ease-in-out infinite alternate;
+  }
+  .hfx__orb--b {
+    animation: orb-b 17s ease-in-out infinite alternate;
+  }
+  @keyframes orb-a {
+    to { transform: translate(90px, 60px) scale(1.15); }
+  }
+  @keyframes orb-b {
+    to { transform: translate(-80px, -50px) scale(1.12); }
+  }
+  .hfx__spark {
+    animation: twinkle 3.6s ease-in-out infinite;
+  }
+  .hfx__spark--2 { animation-delay: -1.2s; }
+  .hfx__spark--3 { animation-delay: -2.1s; animation-duration: 4.4s; }
+  .hfx__spark--4 { animation-delay: -0.6s; animation-duration: 3s; }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.15; transform: scale(0.6) rotate(0deg); }
+    50% { opacity: 1; transform: scale(1.15) rotate(45deg); }
+  }
+  .hfx__chip--a {
+    animation: bob 5s ease-in-out infinite;
+  }
+  .hfx__chip--b {
+    animation: bob 6s ease-in-out -2s infinite;
+  }
+  @keyframes bob {
+    50% { transform: translateY(-12px); }
+  }
+  @media (min-width: 960px) {
+    .hero[data-anim="on"] .hero__visual .card {
+      animation: card-float 7s ease-in-out infinite;
+    }
+    @keyframes card-float {
+      0%, 100% { transform: rotate(-1.6deg) translateY(0); }
+      50% { transform: rotate(-0.8deg) translateY(-10px); }
+    }
+  }
+  .hero[data-anim="on"] .card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(105deg, transparent 35%, rgba(255, 255, 255, 0.14) 50%, transparent 65%);
+    transform: translateX(-120%);
+    animation: sheen 6s ease-in-out 1.6s infinite;
+  }
+  @keyframes sheen {
+    0% { transform: translateX(-120%); }
+    35%, 100% { transform: translateX(120%); }
+  }
+  .hero[data-anim="on"] .card .stamp.is-reward .stamp__disc {
+    animation: ring 2.4s ease-out 2s infinite;
+  }
+  @keyframes ring {
+    0% { box-shadow: 0 0 0 0 rgba(255, 143, 184, 0.55); }
+    70%, 100% { box-shadow: 0 0 0 16px rgba(255, 143, 184, 0); }
+  }
+
+  /* Hover: buttons, links, rows, stamps */
+  .stamp__disc {
+    transition: transform 0.3s var(--ease);
+  }
+  .menu[data-active="true"] {
+    animation: menu-in 0.45s var(--ease) both;
+  }
+  @keyframes menu-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: none; }
+  }
+  .btn:active {
+    transform: scale(0.96);
+  }
+  .switch__btn:active {
+    transform: scale(0.95);
+  }
+  .switch__btn {
+    transition: background-color 0.2s var(--ease), color 0.2s var(--ease), transform 0.15s var(--ease);
+  }
+  .nav__links a {
+    position: relative;
+  }
+  .nav__links a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -5px;
+    height: 2px;
+    background: var(--rose);
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    transition: transform 0.3s var(--ease);
+  }
+  .mark__b {
+    transition: transform 0.4s var(--ease);
+    transform-box: fill-box;
+  }
+  .step__n,
+  .step h3,
+  .menu__name,
+  .menu__price,
+  .facts__in strong,
+  .hours__row,
+  .footer a {
+    transition: transform 0.3s var(--ease), color 0.25s var(--ease), padding 0.3s var(--ease);
+  }
+  .step__n {
+    transform-origin: 0 100%;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) and (hover: hover) {
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+  .btn--rose:hover {
+    box-shadow: 0 12px 24px -10px rgba(196, 45, 102, 0.65);
+  }
+  .btn--ink:hover,
+  .btn--line:hover {
+    box-shadow: 0 12px 24px -12px rgba(25, 23, 28, 0.55);
+  }
+  .btn--onink:hover {
+    box-shadow: 0 10px 22px -12px rgba(255, 255, 255, 0.45);
+  }
+  .btn:hover:active {
+    transform: scale(0.96);
+  }
+  .btn:hover .icon {
+    animation: wiggle 0.6s var(--ease);
+  }
+  @keyframes wiggle {
+    20% { transform: rotate(-14deg) scale(1.12); }
+    45% { transform: rotate(10deg) scale(1.12); }
+    70% { transform: rotate(-6deg); }
+    100% { transform: none; }
+  }
+  .nav__links a:hover::after {
+    transform: scaleX(1);
+  }
+  .brand:hover .mark__b {
+    transform: translateX(4px);
+  }
+  .step:hover .step__n {
+    transform: scale(1.14) rotate(-4deg);
+  }
+  .step:hover h3 {
+    color: var(--rose);
+    transform: translateX(4px);
+  }
+  .facts__in li:hover strong {
+    color: var(--rose);
+    transform: translateX(4px);
+  }
+  .menu__item:hover .menu__name {
+    transform: translateX(5px);
+  }
+  .menu__item:hover .menu__price {
+    color: var(--rose);
+    transform: scale(1.08);
+    transform-origin: 100% 50%;
+  }
+  .hours__row:hover {
+    padding-left: 10px;
+    padding-right: 10px;
+    background: rgba(255, 255, 255, 0.06);
+  }
+  .footer a:hover {
+    color: var(--rose);
+  }
+  .stamp:hover .stamp__disc {
+    transform: scale(1.14) rotate(-6deg);
+  }
+  .hero .card:hover {
+    animation-play-state: paused;
+  }
+  .card__reward {
+    transition: transform 0.3s var(--ease), border-color 0.3s var(--ease), background-color 0.3s var(--ease);
+  }
+  .card__reward:hover {
+    transform: translateY(-3px);
+    border-color: var(--pink);
+    background: rgba(255, 143, 184, 0.1);
   }
 }
 

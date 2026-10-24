@@ -3,6 +3,7 @@ import "@fontsource-variable/bricolage-grotesque";
 import "@fontsource-variable/figtree";
 import "./globals.css";
 import { site } from "@/lib/site";
+import ClickFx from "@/components/ClickFx";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -32,7 +33,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Marks that JS is running so scroll-reveal content is only hidden when it can be revealed again. */}
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <ClickFx />
+      </body>
     </html>
   );
 }

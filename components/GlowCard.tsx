@@ -11,7 +11,7 @@ export default function GlowCard({ children, className }: { children: ReactNode;
     e.currentTarget.style.setProperty("--my", `${e.clientY - r.top}px`);
   }
   return (
-    <article className={["glow", className].filter(Boolean).join(" ")} onPointerMove={move}>
+    <article className={["glow", className].filter(Boolean).join(" ")} data-burst onPointerMove={move}>
       {children}
     </article>
   );

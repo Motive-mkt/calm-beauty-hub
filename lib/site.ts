@@ -39,3 +39,7 @@ export function reviewLink() {
 
 export const mapEmbed = `https://www.google.com/maps?q=${encodeURIComponent(site.mapQuery)}&output=embed`;
 export const mapLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(site.mapQuery)}`;
+
+// Hero motion switch. Say "remove animation on hero section" and this becomes false:
+// the hero then renders as a still page (no headline reveal, floating shapes, sparkles or card motion).
+export const heroAnimated = true;

@@ -8,7 +8,8 @@ import Reveal from "@/components/Reveal";
 import GlowCard from "@/components/GlowCard";
 import Marquee from "@/components/Marquee";
 import { services } from "@/lib/services";
-import { mapEmbed, mapLink, site, telLink, whatsappLink } from "@/lib/site";
+import { HeroBackdrop, HeroChips } from "@/components/HeroFx";
+import { heroAnimated, mapEmbed, mapLink, site, telLink, whatsappLink } from "@/lib/site";
 
 const PLACEHOLDER_NUMBER = "254700000000";
 
@@ -85,24 +86,33 @@ export default function Home() {
       </header>
 
       <main id="main">
-        <section className="hero" id="top">
+        <section className="hero" id="top" data-anim={heroAnimated ? "on" : "off"}>
+          {heroAnimated ? <HeroBackdrop /> : null}
           <div className="wrap hero__in">
             <div className="hero__copy">
               <p className="eyebrow">
                 {site.area} · Women and men
               </p>
-              <TextReveal
-                as="h1"
-                className="hero__title"
-                text={"Five visits.\nOne free treat."}
-                lineClass={["", "hero__pink"]}
-                delay={0.1}
-              />
-              <p className="hero__lede rise" style={{ "--rise-delay": "0.55s" } as CSSProperties}>
+              {heroAnimated ? (
+                <TextReveal
+                  as="h1"
+                  className="hero__title"
+                  text={"Five visits.\nOne free treat."}
+                  lineClass={["", "hero__pink"]}
+                  delay={0.1}
+                />
+              ) : (
+                <h1 className="hero__title">
+                  Five visits.
+                  <br />
+                  <span className="hero__pink">One free treat.</span>
+                </h1>
+              )}
+              <p className={heroAnimated ? "hero__lede rise" : "hero__lede"} style={{ "--rise-delay": "0.55s" } as CSSProperties}>
                 Hair, nails, skin and grooming in {site.area}. Complete 5 paid visits and your 5th comes with a
                 free bonus service: nail art for women, a facial scrub for men.
               </p>
-              <div className="hero__cta rise" style={{ "--rise-delay": "0.7s" } as CSSProperties}>
+              <div className={heroAnimated ? "hero__cta rise" : "hero__cta"} style={{ "--rise-delay": "0.7s" } as CSSProperties}>
                 <a className="btn btn--rose btn--lg" href={whatsappLink()} target="_blank" rel="noopener noreferrer">
                   <WhatsAppIcon /> Book on WhatsApp
                 </a>
@@ -113,7 +123,8 @@ export default function Home() {
             </div>
             <div className="hero__visual">
               <div className="hero__block" aria-hidden="true" />
-              <StampCard />
+              <StampCard animate={heroAnimated} />
+              {heroAnimated ? <HeroChips /> : null}
             </div>
           </div>
         </section>
