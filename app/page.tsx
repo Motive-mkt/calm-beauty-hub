@@ -1,7 +1,12 @@
+import type { CSSProperties } from "react";
 import StampCard from "@/components/StampCard";
 import ServicesMenu from "@/components/ServicesMenu";
 import Reviews from "@/components/Reviews";
 import Mark from "@/components/Mark";
+import TextReveal from "@/components/TextReveal";
+import Reveal from "@/components/Reveal";
+import GlowCard from "@/components/GlowCard";
+import Marquee from "@/components/Marquee";
 import { services } from "@/lib/services";
 import { mapEmbed, mapLink, site, telLink, whatsappLink } from "@/lib/site";
 
@@ -22,6 +27,21 @@ function PhoneIcon() {
     </svg>
   );
 }
+
+const marqueeItems = [
+  "Haircuts",
+  "Braids",
+  "Silk press",
+  "Manicure",
+  "Pedicure",
+  "Nail art",
+  "Beard trim",
+  "Hot towel shave",
+  "Facials",
+  "Facial scrub",
+  "Brows",
+  "Lash lift",
+];
 
 export default function Home() {
   const jsonLd = {
@@ -71,16 +91,18 @@ export default function Home() {
               <p className="eyebrow">
                 {site.area} · Women and men
               </p>
-              <h1 className="hero__title">
-                Five visits.
-                <br />
-                <span className="hero__pink">One free treat.</span>
-              </h1>
-              <p className="hero__lede">
+              <TextReveal
+                as="h1"
+                className="hero__title"
+                text={"Five visits.\nOne free treat."}
+                lineClass={["", "hero__pink"]}
+                delay={0.1}
+              />
+              <p className="hero__lede rise" style={{ "--rise-delay": "0.55s" } as CSSProperties}>
                 Hair, nails, skin and grooming in {site.area}. Complete 5 paid visits and your 5th comes with a
                 free bonus service: nail art for women, a facial scrub for men.
               </p>
-              <div className="hero__cta">
+              <div className="hero__cta rise" style={{ "--rise-delay": "0.7s" } as CSSProperties}>
                 <a className="btn btn--rose btn--lg" href={whatsappLink()} target="_blank" rel="noopener noreferrer">
                   <WhatsAppIcon /> Book on WhatsApp
                 </a>
@@ -113,46 +135,52 @@ export default function Home() {
           </ul>
         </section>
 
+        <Marquee items={marqueeItems} />
+
         <section className="section" id="rewards" aria-labelledby="rewards-h">
           <div className="wrap">
-            <div className="section__head">
+            <Reveal className="section__head">
               <p className="eyebrow">The loyalty reward</p>
               <h2 className="h2" id="rewards-h">
                 How your free treat works
               </h2>
-            </div>
+            </Reveal>
             <ol className="steps">
-              <li className="step">
+              <Reveal as="li" index={0} className="step">
                 <span className="step__n" aria-hidden="true">1</span>
                 <h3>Visit us five times</h3>
                 <p>Each paid visit is logged by the salon, so your progress is always on record.</p>
-              </li>
-              <li className="step">
+              </Reveal>
+              <Reveal as="li" index={1} className="step">
                 <span className="step__n" aria-hidden="true">2</span>
                 <h3>Scan the QR at checkout</h3>
                 <p>
                   Use the QR code in the salon to leave a verified Google review. Adding a photo taken in the
                   salon is optional.
                 </p>
-              </li>
-              <li className="step">
+              </Reveal>
+              <Reveal as="li" index={2} className="step">
                 <span className="step__n" aria-hidden="true">3</span>
                 <h3>Enjoy your bonus service</h3>
                 <p>Once your five paid visits and your review are confirmed, the free treat is yours.</p>
-              </li>
+              </Reveal>
             </ol>
 
             <div className="rewards">
-              <article className="reward">
+              <Reveal index={0}>
+                <GlowCard className="reward">
                 <p className="reward__for">Women</p>
                 <h3 className="reward__name">Free nail art</h3>
                 <p>A hand-painted design added to your visit.</p>
-              </article>
-              <article className="reward">
+                </GlowCard>
+              </Reveal>
+              <Reveal index={1}>
+                <GlowCard className="reward">
                 <p className="reward__for">Men</p>
                 <h3 className="reward__name">Free facial scrub</h3>
                 <p>A deep-cleansing scrub to finish your grooming.</p>
-              </article>
+                </GlowCard>
+              </Reveal>
             </div>
             <p className="fine">Rewards apply to paid visits. Ask us at any visit how many stamps you have.</p>
           </div>
@@ -160,32 +188,36 @@ export default function Home() {
 
         <section className="section section--tint" id="services" aria-labelledby="services-h">
           <div className="wrap">
-            <div className="section__head">
+            <Reveal className="section__head">
               <p className="eyebrow">Services and prices</p>
               <h2 className="h2" id="services-h">
                 Choose your treatment
               </h2>
-            </div>
-            <ServicesMenu menu={services} />
+            </Reveal>
+            <Reveal>
+              <ServicesMenu menu={services} />
+            </Reveal>
             <p className="fine">Prices are in Kenya shillings. “From” prices depend on length and style.</p>
           </div>
         </section>
 
         <section className="section" id="reviews" aria-labelledby="reviews-h">
           <div className="wrap">
-            <div className="section__head">
+            <Reveal className="section__head">
               <p className="eyebrow">What clients say</p>
               <h2 className="h2" id="reviews-h">
                 Verified Google reviews
               </h2>
-            </div>
-            <Reviews />
+            </Reveal>
+            <Reveal>
+              <Reviews />
+            </Reveal>
           </div>
         </section>
 
         <section className="section section--dark" id="visit" aria-labelledby="visit-h">
           <div className="wrap visit">
-            <div className="visit__info">
+            <Reveal className="visit__info">
               <p className="eyebrow eyebrow--onink">Find us</p>
               <h2 className="h2" id="visit-h">
                 Visit us in {site.area}
@@ -218,9 +250,9 @@ export default function Home() {
                   Get directions
                 </a>
               </div>
-            </div>
+            </Reveal>
 
-            <div className="visit__map">
+            <Reveal index={1} className="visit__map">
               <iframe
                 title={`Map showing ${site.name} in ${site.area}`}
                 src={mapEmbed}
@@ -228,7 +260,7 @@ export default function Home() {
                 referrerPolicy="no-referrer-when-downgrade"
                 allowFullScreen
               />
-            </div>
+            </Reveal>
           </div>
         </section>
       </main>
