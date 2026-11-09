@@ -24,7 +24,7 @@ export type Client = {
 };
 
 export const rewardFor = (gender: Gender) =>
-  gender === "men" ? "Free facial scrub" : "Free nail art";
+  gender === "men" ? "Free haircut" : "Free nail art";
 
 export type Progress = {
   cycleVisits: number; // paid visits in the current cycle, capped at 5

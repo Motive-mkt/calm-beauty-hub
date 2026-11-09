@@ -22,7 +22,7 @@ export default function StampCard({ animate = true }: { animate?: boolean }) {
         </div>
         <div className="card__reward">
           <span className="card__for">Men</span>
-          <span className="card__name">Free facial scrub</span>
+          <span className="card__name">Free haircut</span>
         </div>
       </div>
     </div>

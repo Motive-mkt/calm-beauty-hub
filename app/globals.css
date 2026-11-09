@@ -748,6 +748,12 @@ button {
   .menu {
     margin-top: 0;
   }
+  .menu--wide {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 36px 64px;
+    align-items: start;
+  }
 }
 
 /* ---------- Reviews ---------- */

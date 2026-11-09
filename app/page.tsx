@@ -30,18 +30,18 @@ function PhoneIcon() {
 }
 
 const marqueeItems = [
-  "Haircuts",
-  "Braids",
-  "Silk press",
-  "Manicure",
+  "Gel nails",
+  "French tips",
+  "Builder gel",
   "Pedicure",
-  "Nail art",
-  "Beard trim",
-  "Hot towel shave",
-  "Facials",
-  "Facial scrub",
-  "Brows",
-  "Lash lift",
+  "Pedigel",
+  "Shaving",
+  "Facial scrubbing",
+  "Facial steaming",
+  "Eyelashes",
+  "Eyebrow shaping",
+  "Full body massage",
+  "Half body massage",
 ];
 
 export default function Home() {
@@ -110,7 +110,7 @@ export default function Home() {
               )}
               <p className={heroAnimated ? "hero__lede rise" : "hero__lede"} style={{ "--rise-delay": "0.55s" } as CSSProperties}>
                 Hair, nails, skin and grooming in {site.area}. Complete 5 paid visits and your 5th comes with a
-                free bonus service: nail art for women, a facial scrub for men.
+                free bonus service: nail art for women, a haircut for men.
               </p>
               <div className={heroAnimated ? "hero__cta rise" : "hero__cta"} style={{ "--rise-delay": "0.7s" } as CSSProperties}>
                 <a className="btn btn--rose btn--lg" href={whatsappLink()} target="_blank" rel="noopener noreferrer">
@@ -133,7 +133,7 @@ export default function Home() {
           <ul className="wrap facts__in">
             <li>
               <strong>For women and men</strong>
-              <span>One salon, two full menus</span>
+              <span>Nails, grooming, skin and massage</span>
             </li>
             <li>
               <strong>Prices up front</strong>
@@ -188,8 +188,8 @@ export default function Home() {
               <Reveal index={1}>
                 <GlowCard className="reward">
                 <p className="reward__for">Men</p>
-                <h3 className="reward__name">Free facial scrub</h3>
-                <p>A deep-cleansing scrub to finish your grooming.</p>
+                <h3 className="reward__name">Free haircut</h3>
+                <p>Your fifth-visit cut, on us.</p>
                 </GlowCard>
               </Reveal>
             </div>
@@ -208,7 +208,7 @@ export default function Home() {
             <Reveal>
               <ServicesMenu menu={services} />
             </Reveal>
-            <p className="fine">Prices are in Kenya shillings. “From” prices depend on length and style.</p>
+            <p className="fine">All prices are in Kenya shillings.</p>
           </div>
         </section>
 

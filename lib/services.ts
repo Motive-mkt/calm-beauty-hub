@@ -1,67 +1,49 @@
-// PLACEHOLDER menu and prices (KES). Replace with the salon's real list.
+// Services and prices (KES), taken from the salon's own handwritten price list.
 
 export type ServiceItem = { name: string; price: string; note?: string };
 export type ServiceGroup = { title: string; items: ServiceItem[] };
 
-export const services: Record<"women" | "men", ServiceGroup[]> = {
-  women: [
-    {
-      title: "Hair",
-      items: [
-        { name: "Wash and blow-dry", price: "600" },
-        { name: "Silk press", price: "2,500" },
-        { name: "Braids and twists", price: "from 1,500" },
-        { name: "Deep conditioning treatment", price: "1,500" },
-        { name: "Relaxer touch-up", price: "2,000" },
-      ],
-    },
-    {
-      title: "Nails",
-      items: [
-        { name: "Classic manicure", price: "800" },
-        { name: "Classic pedicure", price: "1,000" },
-        { name: "Gel polish", price: "1,200" },
-        { name: "Acrylic full set", price: "2,500" },
-        { name: "Nail art", price: "from 300", note: "per nail design" },
-      ],
-    },
-    {
-      title: "Face and brows",
-      items: [
-        { name: "Express facial", price: "1,500" },
-        { name: "Deep-cleanse facial", price: "2,500" },
-        { name: "Brow shaping", price: "500" },
-        { name: "Lash lift", price: "2,500" },
-        { name: "Makeup application", price: "3,000" },
-      ],
-    },
-  ],
-  men: [
-    {
-      title: "Hair and beard",
-      items: [
-        { name: "Haircut", price: "400" },
-        { name: "Haircut and beard trim", price: "600" },
-        { name: "Beard shape-up", price: "300" },
-        { name: "Hot towel shave", price: "500" },
-        { name: "Kids' cut", price: "300" },
-      ],
-    },
-    {
-      title: "Skin",
-      items: [
-        { name: "Facial scrub", price: "800" },
-        { name: "Deep-cleanse facial", price: "2,000" },
-        { name: "Back and shoulder scrub", price: "1,200" },
-      ],
-    },
-    {
-      title: "Hands and feet",
-      items: [
-        { name: "Manicure", price: "700" },
-        { name: "Pedicure", price: "900" },
-        { name: "Foot scrub and massage", price: "1,200" },
-      ],
-    },
-  ],
-};
+export const services: ServiceGroup[] = [
+  {
+    title: "Nails",
+    items: [
+      { name: "Plain gel", price: "500" },
+      { name: "Tips and gel", price: "700" },
+      { name: "French tips", price: "1,000" },
+      { name: "Builder gel", price: "800" },
+      { name: "Builder gel with French", price: "1,100" },
+    ],
+  },
+  {
+    title: "Feet",
+    items: [
+      { name: "Pedicure", price: "800" },
+      { name: "Pedigel", price: "1,000" },
+      { name: "Toe gel", price: "400" },
+      { name: "Toe gel with French", price: "500" },
+    ],
+  },
+  {
+    title: "Grooming",
+    items: [
+      { name: "Shaving", price: "300" },
+      { name: "Dyeing", price: "300" },
+    ],
+  },
+  {
+    title: "Face and brows",
+    items: [
+      { name: "Facial scrubbing", price: "500" },
+      { name: "Facial steaming", price: "1,500" },
+      { name: "Eyelashes", price: "800" },
+      { name: "Eyebrow shaping", price: "100" },
+    ],
+  },
+  {
+    title: "Massage",
+    items: [
+      { name: "Full body massage", price: "3,000" },
+      { name: "Half body massage", price: "2,000" },
+    ],
+  },
+];

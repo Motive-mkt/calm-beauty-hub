@@ -28,7 +28,7 @@ export function HeroChips() {
         <i /> Free nail art
       </span>
       <span className="hfx__chip hfx__chip--b" aria-hidden="true">
-        <i /> Free facial scrub
+        <i /> Free haircut
       </span>
     </>
   );

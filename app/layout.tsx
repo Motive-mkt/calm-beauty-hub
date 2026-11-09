@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     default: `${site.name} | Salon for women and men in ${site.area}`,
     template: `%s | ${site.name}`,
   },
-  description: `Hair, nails, facials and grooming for women and men in ${site.area}. Complete 5 paid visits and enjoy a free bonus service: nail art for women, a facial scrub for men.`,
+  description: `Hair, nails, facials and grooming for women and men in ${site.area}. Complete 5 paid visits and enjoy a free bonus service: nail art for women, a haircut for men.`,
   openGraph: {
     title: `${site.name} | Salon for women and men in ${site.area}`,
     description: "Five visits, one free treat. Book on WhatsApp.",

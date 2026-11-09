@@ -24,11 +24,11 @@ Without `BLOB_READ_WRITE_TOKEN`, client data is stored in `.data/clients.json` (
 | WhatsApp / phone number | `NEXT_PUBLIC_WHATSAPP`, `NEXT_PUBLIC_PHONE` |
 | Landmark (hidden until set) | `NEXT_PUBLIC_LANDMARK` |
 | Opening hours (placeholder) | `lib/site.ts` |
-| Services and prices (placeholder) | `lib/services.ts` |
+| Services and prices (from the salon's price list) | `lib/services.ts` |
 | Google reviews | `GOOGLE_PLACES_API_KEY` + `GOOGLE_PLACE_ID` (reviews show only real data) |
 
 ## Loyalty rules as built
 
-- A cycle is 5 paid visits. The 5th visit earns the bonus service: free nail art (women) or free facial scrub (men).
+- A cycle is 5 paid visits. The 5th visit earns the bonus service: free nail art (women) or a free haircut (men).
 - The reward unlocks once the owner has logged 5 paid visits **and** verified the client's Google review.
 - Claiming the reward starts a new cycle; the next cycle needs a fresh verified review.
